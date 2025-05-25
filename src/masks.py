@@ -15,6 +15,7 @@ def get_mask_card_number(card_number: Any) -> str:
     card_number_masked = "".join(mask_number_list)
     return card_number_masked
 
+
 if __name__ == "__main__":
     print(get_mask_card_number("123 4567812 34534958903458 309580-348678"))
 
