@@ -20,9 +20,9 @@ if __name__ == "__main__":
     print(filter_by_state(lists_))
 
 
-def sort_by_date(data: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def sort_by_date(data: List[Dict[str, Any]], reverse: bool=False) -> List[Dict[str, Any]]:
     """Функция возвращает отсортированный список по дате"""
-    sorted_list = sorted(data, key=lambda x: x["date"])
+    sorted_list = sorted(data, key=lambda x: x["date"], reverse=reverse)
     return sorted_list
 
 
