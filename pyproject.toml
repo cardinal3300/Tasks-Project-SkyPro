@@ -26,7 +26,7 @@ line-length = 119
 exclude = """ \\.git """
 
 [tool.isort]
-line-length = 119
+profile = "black"
 
 [tool.mypy]
 strict_optional = true
