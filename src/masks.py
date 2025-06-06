@@ -1,10 +1,10 @@
-from typing import Any
 import re
+from typing import Any
 
 
 def get_mask_card_number(card_number: Any) -> str:
-    """ Возвращает замаскированный номер банковской карты,
-в формате XXXX XX** **** XXXX, где X - цифры """
+    """Возвращает замаскированный номер банковской карты,
+    в формате XXXX XX** **** XXXX, где X - цифры"""
 
     if not isinstance(card_number, (str, int)):
         return "Ошибка: Неверный тип данных. Ожидается строка или число."
@@ -15,19 +15,13 @@ def get_mask_card_number(card_number: Any) -> str:
     if len(card_number_str) <= 12:
         return "Ошибка: Некорректная длина номера карты."
 
-    masked_part = card_number_str[6:12] # Блок маскировки
-    masked_number = (
-        card_number_str[:4]
-        + " "
-        + card_number_str[4:6]
-        + "** **** "
-        + card_number_str[12:]
-    )
+    # Блок маскировки
+    masked_number = card_number_str[:4] + " " + card_number_str[4:6] + "** **** " + card_number_str[12:]
     return masked_number
 
 
 def get_mask_account(check_number: Any) -> str:
-    """ Маскирует номер банковского счета, отображая последние 4 цифры в формате **XXXX """
+    """Маскирует номер банковского счета, отображая последние 4 цифры в формате **XXXX"""
 
     if not isinstance(check_number, (str, int)):
         return "Ошибка: Неверный тип данных.  Ожидается строка или число."
@@ -46,5 +40,5 @@ if __name__ == "__main__":
     print(get_mask_card_number("1234 5678 9012 3456"))
     print(get_mask_card_number("123456789012"))
     print(get_mask_card_number("1a23456789012345"))
-    print(get_mask_card_number(1234567890123456))
+    print(get_mask_card_number(123457890123456))
     print(get_mask_card_number("123"))
