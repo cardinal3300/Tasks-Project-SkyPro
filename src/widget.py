@@ -5,10 +5,8 @@ from src.masks import get_mask_account, get_mask_card_number
 
 def mask_account_card(type_and_number: str) -> str:
     """Маскирует номер карты или счета в зависимости от типа"""
-
     if not isinstance(type_and_number, str):
         return "Ошибка: Входные данные должны быть строкой."
-
     type_and_number_lower = type_and_number.lower()
     if "счет" in type_and_number_lower:
         try:
@@ -36,13 +34,6 @@ def mask_account_card(type_and_number: str) -> str:
 
 def get_date(data_card_number: Any) -> str:
     """Возвращает строку с датой в формате 'ДД.ММ.ГГГГ'"""
-
     if not isinstance(data_card_number, str):
         return "Ошибка: Входные данные должны быть строкой."
     return data_card_number[8:10] + "." + data_card_number[5:7] + "." + data_card_number[:4]
-
-
-if __name__ == "__main__":
-    print(mask_account_card("Maestro 1596837868705199"))
-    print(mask_account_card("Счет 73654108430135874305"))
-    print(get_date("2024-03-11T02:26:18.671407"))
