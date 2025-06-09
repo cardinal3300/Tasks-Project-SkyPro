@@ -1,23 +1,16 @@
 import pytest
 
-from src.masks import get_mask_account, get_mask_card_number
-from src.processing import filter_by_state, sort_by_date
-from src.widget import get_date, mask_account_card
+from src.widget import get_date, mask_account_card, get_mask_account
 
 
-@pytest.fixture
-def test_data():
-    """Предоставляет общие тестовые данные для использования в тестах."""
-    return {
-        "card_number": "1234567890123456",
-        "check_number": "1234567890",
-        "date_string": "2024-03-11T02:26:18.671407",
-        "data_list": [
-            {"id": 1, "state": "EXECUTED", "date": "2024-03-15T18:35:29.512364"},
-            {"id": 2, "state": "PENDING", "date": "2024-01-20T10:10:10.123456"},
-            {"id": 3, "state": "EXECUTED", "date": "2024-02-28T12:12:12.987654"},
-        ],
-    }
+@pytest.mark.parametrize("input_string, expected_output",[
+    ("Счет 73654108430135874305", "Счет **4305"),
+    ("invalid_input", "Тип карты/счета не определен."),
+    ("Счет abcdefgh", "Ошибка: Номер счета содержит недопустимые символы."),
+    (1234567890, "Ошибка: Входные данные должны быть строкой."),]
+                         )
+def test_mask_account_card_parametrize(input_string: str, expected_output: str):
+    assert mask_account_card(input_string) == expected_output
 
 
 def test_mask_account_card_account(test_data):
@@ -30,11 +23,16 @@ def test_mask_account_card_card(test_data):
     assert mask_account_card("Visa 1234567890123456") == "Visa 1234 56** **** 3456"
 
 
-def test_mask_account_card_invalid():
+def test_mask_account_card_invalid(test_data):
     """Проверяет обработку некорректного ввода mask_account_card"""
     assert mask_account_card("invalid_input") == "Тип карты/счета не определен."
 
 
 def test_get_date_valid(test_data):
     """Проверяет корректное преобразование даты."""
-    assert get_date(test_data["date_string"]) == "11.03.2024"
+    assert get_date("2024-03-11T02:26:18.671407") == "11.03.2024"
+
+
+def test_get_date_str(test_data):
+    """Проверяет входные данные"""
+    assert get_date(12345678) == "Ошибка: Входные данные должны быть строкой."
