@@ -1,14 +1,17 @@
 import pytest
 
-from src.widget import get_date, mask_account_card, get_mask_account
+from src.widget import get_date, mask_account_card
 
 
-@pytest.mark.parametrize("input_string, expected_output",[
-    ("Счет 73654108430135874305", "Счет **4305"),
-    ("invalid_input", "Тип карты/счета не определен."),
-    ("Счет abcdefgh", "Ошибка: Номер счета содержит недопустимые символы."),
-    (1234567890, "Ошибка: Входные данные должны быть строкой."),]
-                         )
+@pytest.mark.parametrize(
+    "input_string, expected_output",
+    [
+        ("Счет 73654108430135874305", "Счет **4305"),
+        ("invalid_input", "Тип карты/счета не определен."),
+        ("Счет abcdefgh", "Ошибка: Номер счета содержит недопустимые символы."),
+        (1234567890, "Ошибка: Входные данные должны быть строкой."),
+    ],
+)
 def test_mask_account_card_parametrize(input_string: str, expected_output: str):
     assert mask_account_card(input_string) == expected_output
 
