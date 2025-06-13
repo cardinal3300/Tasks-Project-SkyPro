@@ -86,5 +86,5 @@ if __name__ == "__main__":
     for card_number in card_number_generator(1, 5):
         print(card_number)
 
-    # number = 1234567890123456
-    # print(format_card_number(number))
+    number = 1234567890123456
+    print(format_card_number(number))

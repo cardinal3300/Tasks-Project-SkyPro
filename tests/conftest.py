@@ -5,7 +5,7 @@ import pytest
 from src.generators import (
     card_number_generator,
     transaction_descriptions,
-)
+ )
 
 
 @pytest.fixture
@@ -75,6 +75,13 @@ def card_number_string() -> str:
     return "1234567890123456"
 
 
+@pytest.fixture
+def card_number_generator_setup() -> Iterator[str]:
+    """Настройка для card_number_generator, чтобы избежать проблем с состоянием."""
+    for number in card_number_generator(1, 3):
+        yield number
+
+
 def test_transaction_descriptions_valid(transactions_data: List[Dict[str, Any]]):
     """Тестирует генератор описаний транзакций."""
     descriptions = list(transaction_descriptions(transactions_data))
@@ -86,18 +93,11 @@ def test_transaction_descriptions_valid(transactions_data: List[Dict[str, Any]])
     assert descriptions == expected_descriptions
 
 
-@pytest.fixture
-def card_number_generator_setup(start, stop) -> Iterator[str]:
-    """Настройка для card_number_generator, чтобы избежать проблем с состоянием."""
-    for number in card_number_generator(1, 3):
-        yield number
-
-
-def test_card_number_generator_valid():
+def test_card_number_generator_valid(card_number_generator_setup):
     """Проверяет генерацию номеров карт в заданном диапазоне."""
-    assert start == "0000 0000 0000 0001"
-
+    assert card_number_generator_setup == "0000 0000 0000 0001"
 
 def test_card_number_generator_formatting(card_number_generator_setup):
     """Проверяет правильное форматирование номеров карт."""
     assert card_number_generator_setup[:4] == "0000"
+
