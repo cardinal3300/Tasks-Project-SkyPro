@@ -5,7 +5,7 @@ import pytest
 from src.generators import (
     card_number_generator,
     transaction_descriptions,
- )
+)
 
 
 @pytest.fixture
@@ -97,7 +97,7 @@ def test_card_number_generator_valid(card_number_generator_setup):
     """Проверяет генерацию номеров карт в заданном диапазоне."""
     assert card_number_generator_setup == "0000 0000 0000 0001"
 
+
 def test_card_number_generator_formatting(card_number_generator_setup):
     """Проверяет правильное форматирование номеров карт."""
     assert card_number_generator_setup[:4] == "0000"
-

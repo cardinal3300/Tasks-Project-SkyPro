@@ -11,6 +11,11 @@ def test_get_mask_card_number_invalid(test_data: str) -> str:
     assert get_mask_card_number("abc") == "Ошибка: Номер карты содержит недопустимые символы."
 
 
+def test_get_mask_card_number_length(test_data: str) -> str:
+    """Проверяет корректную длину счета для get_mask_card_number"""
+    assert get_mask_card_number("123456") == "Ошибка: Некорректная длина номера карты."
+
+
 def test_get_mask_account_valid(test_data: str) -> str:
     """Проверяет корректное маскирование номера счета."""
     assert get_mask_account("12345678901234567890") == "**7890"

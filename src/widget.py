@@ -18,8 +18,6 @@ def mask_account_card(type_and_number: str) -> str:
     if any(card_type in type_and_number_lower for card_type in card_types):
         card_number = type_and_number.split()[-1]  # Получаем номер карты, предполагая, что он - последнее слово
         masked_card = get_mask_card_number(card_number)
-        if "Ошибка" in masked_card:  # Проверка, что get_mask_card_number() не вернула ошибку
-            return masked_card
         return f"{type_and_number.rsplit(' ', 1)[0]} {masked_card}"  # Возвращаем название карты и маску
     else:
         return "Тип карты/счета не определен."
