@@ -38,4 +38,4 @@ def test_get_date_valid(test_data):
 
 def test_get_date_str(test_data):
     """Проверяет входные данные"""
-    assert get_date(12345678) == "Ошибка: Входные данные должны быть строкой."
+    assert get_date(20240311022618671407) == "Ошибка: Входные данные должны быть строкой."

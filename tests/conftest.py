@@ -4,13 +4,8 @@ import pytest
 
 from src.generators import (
     card_number_generator,
-    filter_by_currency,
-    format_card_number,
     transaction_descriptions,
 )
-from src.masks import get_mask_account, get_mask_card_number
-from src.processing import filter_by_state, sort_by_date
-from src.widget import get_date, mask_account_card
 
 
 @pytest.fixture
@@ -18,8 +13,9 @@ def test_data():
     """Предоставляет общие тестовые данные для использования в тестах."""
     return {
         "card_number": "1234567890123456",
-        "check_number": "1234567890",
+        "check_number": "12345678901234567890",
         "date_valid": "2024-03-11T02:26:18.671407",
+        "abc": "Ошибка: Номер карты содержит недопустимые символы.",
         "date_string": 20240311022618671407,
         "data_list": [
             {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
@@ -91,15 +87,15 @@ def test_transaction_descriptions_valid(transactions_data: List[Dict[str, Any]])
 
 
 @pytest.fixture
-def card_number_generator_setup() -> Iterator[str]:  # Для изолированных тестов.
+def card_number_generator_setup(start, stop) -> Iterator[str]:
     """Настройка для card_number_generator, чтобы избежать проблем с состоянием."""
-    for number in card_number_generator(1, 3):  #  Здесь мы вызываем генератор, а не сам объект генератора.
+    for number in card_number_generator(1, 3):
         yield number
 
 
-def test_card_number_generator_valid(card_number_generator_setup):
+def test_card_number_generator_valid():
     """Проверяет генерацию номеров карт в заданном диапазоне."""
-    assert card_number_generator_setup == "0000 0000 0000 0001"
+    assert start == "0000 0000 0000 0001"
 
 
 def test_card_number_generator_formatting(card_number_generator_setup):

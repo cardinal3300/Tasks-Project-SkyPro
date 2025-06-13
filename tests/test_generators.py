@@ -1,4 +1,4 @@
-from typing import Any, Dict, Iterator, List
+from typing import Any, Dict, List
 
 import pytest
 
@@ -13,9 +13,9 @@ from src.generators import (
 @pytest.mark.parametrize(
     "currency_code, expected_count, expected_ids",
     [
-        ("USD", 2, [1, 2]),  # Проверка для USD
-        ("EUR", 1, [3]),  # Проверка для EUR
-        ("RUB", 0, []),  # Проверка для отсутствующей валюты
+        ("USD", 2, [1, 2]),
+        ("EUR", 1, [3]),
+        ("RUB", 0, []),
     ],
 )
 def test_filter_by_currency_parameterized(
@@ -28,7 +28,7 @@ def test_filter_by_currency_parameterized(
     assert actual_ids == expected_ids
 
 
-## 1. Тестирование функции filter_by_currency
+# 1. Тестирование функции filter_by_currency
 
 
 def test_filter_by_currency_valid():
@@ -60,7 +60,7 @@ def test_filter_by_currency_no_matching_currency():
     assert usd_transactions == []
 
 
-### 2. Тестирование функции transaction_descriptions
+# 2. Тестирование функции transaction_descriptions
 
 
 def test_transaction_descriptions_valid():
@@ -108,7 +108,7 @@ def test_card_number_generator_valid():
     assert generated_numbers[2] == "0000 0000 0000 0003"
 
 
-### 3. Тестирование генератора card_number_generator
+# 3. Тестирование генератора card_number_generator
 
 
 def test_card_number_generator_formatting():
