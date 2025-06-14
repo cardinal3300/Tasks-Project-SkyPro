@@ -22,7 +22,7 @@
 
 ### 1. `get_mask_card_number(card_number)`
 
-Функция Возвращает замаскированный номер банковской карты, в формате XXXX XX** **** XXXX, где X - цифры.
+Функция возвращает замаскированный номер банковской карты, в формате XXXX XX** **** XXXX, где X - цифры.
 
 *   **Параметры:**
 
@@ -34,19 +34,16 @@
 
 *   **Пример:**
 
-    python
-
+    ```python
     from your_module import get_mask_card_number # Замените your_module на имя вашего модуля
-
     card_number = 1234567890123456
-
     masked_card = get_mask_card_number(card_number)
-
-    print(masked_card)  # Вывод: 1234 56** ** 3456
+    print(masked_card)
+    >>> 1234 56** ** 3456
 
 ### 2. `get_mask_account(check_number)`
 
-Функция маскирует номер банковского счета, отображая последние 4 цифры в формате **XXXX.
+Функция Маскирует номер банковского счета, отображая последние 4 цифры в формате **XXXX.
 
 *   **Параметры:**
 
@@ -58,15 +55,12 @@
 
 *   **Пример:**
 
-    python
-
+    ```python
     from your_module import get_mask_account # Замените your_module на имя вашего модуля
-
     account_check_number = 73654108430135874305
-
     masked_check_number = get_mask_account(account_check_number)
-
-    print(masked_check_number)  # Вывод: **4305
+    print(masked_check_number)
+    >>> **4305
 
 ### 3. `mask_account_card(type_and_number)`
 
@@ -82,15 +76,12 @@
 
 *   **Пример:**
 
-    python
-
+    ```python
     from your_module import mask_account_card # Замените your_module на имя вашего модуля
-
     account_type_and_number = Platinum Visa 7000792289606361
-
     masked_account_type_number = mask_account_card(account_type_and_number)
-
-    print(masked_account_type_number)  # Вывод: Visa Platinum 7000 79** **** 6361
+    print(masked_account_type_number)
+    >>> Visa Platinum 7000 79** **** 6361
 
 ### 4. `get_date(data_card_number)`
 
@@ -106,19 +97,16 @@
 
 *   **Пример**
 
-    Python
-
+    ```Python
     from your_module import get_date # Замените your_module на имя вашего модуля
-
     account_data = 2024-03-11T02:26:18.671407
-
     new_account_data = get_date(account_data)
-
-    print(new_account_data)  # Вывод: 11.03.2024
+    print(new_account_data)
+    >>> 11.03.2024
 
 ### 5. `filter_by_state(data, state="EXECUTED")`
 
-Функция фильтрует список словарей по значению ключа 'state'.
+Функция фильтрует список словарей, возвращая только те, у которых значение ключа 'state' соответствует заданному.
 
 *   **Параметры:**
 
@@ -132,22 +120,18 @@
 
 *   **Пример:**
 
-    python
-
+    ```python
     from your_module import filter_by_state # Замените your_module на имя вашего модуля  
-
-    data = [{'id': 1, 'state': 'EXECUTED'},\
-{'id': 2, 'state': 'PENDING'},\
-{'id': 3, 'state': 'EXECUTED'}]
-
+    data = [{'id': 1, 'state': 'EXECUTED'},
+            {'id': 2, 'state': 'PENDING'},
+            {'id': 3, 'state': 'EXECUTED'}]
     executed_items = filter_by_state(data)
-
-    print(executed_items) # Вывод: [{'id': 1, 'state': 'EXECUTED'}, {'id': 3, 'state': 'EXECUTED'}]
+    print(executed_items)
+    >>> [{'id': 1, 'state': 'EXECUTED'}, {'id': 3, 'state': 'EXECUTED'}]
 
 ### 6. `sort_by_date(data, reverse=True)`
 
-Функция сортирует список словарей по ключу 'date' (в формате
-YYYY-MM-DD)
+Функция сортирует список словарей по значению ключа 'date' (в формате YYYY-MM-DD).
 
 *   **Параметры**
 
@@ -162,21 +146,88 @@ YYYY-MM-DD)
     
 *   **Пример**
 
-    python
-
+    ```python
     from your_module import sort_by_date # Замените your_module на имя вашего модуля
-
-    data = [{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},\
-{'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'},\
-{'id': 594226727, 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689'},\
-{'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'}]
-
+    data = [{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
+            {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'},
+            {'id': 594226727, 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689'},
+            {'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'}]
     sorted_data = sort_by_date(data)
+    print(sorted_data)
+    >>> [{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
+         {'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'},
+         {'id': 594226727, 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689'},
+         {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'}]
 
-    print(sorted_data) # [{'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},\
-{'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'},\
-{'id': 594226727, 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689'},\
-{'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'}]
+### 7. `filter_by_currency(transactions: List[Dict[str, Any]], currency: str)`
+
+Функция фильтрует транзакции по заданной валюте и возвращает итератор, который последовательно выдает только те транзакции, где валюта соответствует заданному значению.
+
+*   *Параметры:*
+    *   transactions (List[Dict[str, Any]]): Список словарей с транзакциями.
+    *   currency (str): Код валюты для фильтрации, например, "USD".
+
+*   *Возвращаемое значение:*
+    *   (Iterator[Dict[str, Any]]): Итератор с отфильтрованными транзакциями.
+
+*   *Пример:*
+
+    ```python
+    from your_module import filter_by_currency # Замените your_module на имя вашего модуля
+    usd_transactions = filter_by_currency(transactions, "USD")
+    for _ in range(3):
+    print(next(usd_transactions))
+    >>> {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572', 'operationAmount': {'amount': '9824.07', 'currency': {'name': 'USD', 'code': 'USD'}}, 'description': 'Перевод организации', 'from': 'Счет 75106830613657916952', 'to': 'Счет 11776614605963066702'}
+        {'id': 142264268, 'state': 'EXECUTED', 'date': '2019-04-04T23:20:05.206878', 'operationAmount': {'amount': '79114.93', 'currency': {'name': 'USD', 'code': 'USD'}}, 'description': 'Перевод со счета на счет', 'from': 'Счет 19708645243227258542', 'to': 'Счет 75651667383060284188'}
+        {'id': 895315941, 'state': 'EXECUTED', 'date': '2018-08-19T04:27:37.904916', 'operationAmount': {'amount': '56883.54', 'currency': {'name': 'USD', 'code': 'USD'}}, 'description': 'Перевод с карты на карту', 'from': 'Visa Classic 6831982476737658', 'to': 'Visa Platinum 8990922113665229'}
+    
+
+### 8. `transaction_descriptions(transactions: List[Dict[str, Any]])`
+
+Функция генерирует описания транзакций из списка словарей с транзакциями.
+
+*   *Параметры:*
+    *   transactions (List[Dict[str, Any]]): Список словарей, представляющих транзакции.
+
+*   *Возвращаемое значение:*
+    *   (Iterator[str]): Итератор описаний транзакций.
+
+*   *Пример:*
+
+    ```python
+    from your_module import transaction_descriptions # Замените your_module на имя вашего модуля
+    descriptions = transaction_descriptions(transactions)
+    for _ in range(5):
+    print(next(descriptions))
+    >>> Перевод организации
+        Перевод со счета на счет
+        Перевод со счета на счет
+        Перевод с карты на карту
+        Перевод организации
+    
+
+### 9. `card_number_generator(start: int, end: int)`
+
+Генератор, который создает номера банковских карт в формате XXXX XXXX XXXX XXXX в заданном диапазоне.
+
+*   *Параметры:*
+    *   start (int): Начальное значение диапазона (включительно).
+    *   end (int): Конечное значение диапазона (включительно).
+
+*   *Возвращаемое значение:*
+    *   (Iterator[str]): Итератор с номерами банковских карт в заданном диапазоне.
+
+*   *Пример:*
+
+    ```python
+    from your_module import card_number_generator # Замените your_module на имя вашего модуля
+    for card_number in card_number_generator(1, 5):
+    print(card_number)
+    >>> 0000 0000 0000 0001
+        0000 0000 0000 0002
+        0000 0000 0000 0003
+        0000 0000 0000 0004
+        0000 0000 0000 0005
 
 ## Тестирование
 
