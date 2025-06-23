@@ -1,7 +1,9 @@
 from typing import Any, Dict, Iterator, List
 
 import pytest
+import os
 
+from src.decorators import log
 from src.generators import (
     card_number_generator,
     transaction_descriptions,
@@ -101,3 +103,8 @@ def test_card_number_generator_valid(card_number_generator_setup):
 def test_card_number_generator_formatting(card_number_generator_setup):
     """Проверяет правильное форматирование номеров карт."""
     assert card_number_generator_setup[:4] == "0000"
+
+
+@log(filename="testlog.txt")
+def add(x, y):
+    return x + y

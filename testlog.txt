@@ -1,0 +1,4 @@
+add ok
+add error: TypeError. Inputs: ('2', 3), {}
+add ok
+add error: TypeError. Inputs: ('1', 2), {}
