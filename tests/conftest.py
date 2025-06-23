@@ -1,7 +1,6 @@
 from typing import Any, Dict, Iterator, List
 
 import pytest
-import os
 
 from src.decorators import log
 from src.generators import (
@@ -11,7 +10,7 @@ from src.generators import (
 
 
 @pytest.fixture
-def test_data():
+def test_data() -> Dict[str, Any]:
     """Предоставляет общие тестовые данные для использования в тестах."""
     return {
         "card_number": "1234567890123456",
@@ -84,7 +83,7 @@ def card_number_generator_setup() -> Iterator[str]:
         yield number
 
 
-def test_transaction_descriptions_valid(transactions_data: List[Dict[str, Any]]):
+def test_transaction_descriptions_valid(transactions_data: List[Dict[str, Any]]) -> None:
     """Тестирует генератор описаний транзакций."""
     descriptions = list(transaction_descriptions(transactions_data))
     expected_descriptions = [
@@ -95,16 +94,16 @@ def test_transaction_descriptions_valid(transactions_data: List[Dict[str, Any]])
     assert descriptions == expected_descriptions
 
 
-def test_card_number_generator_valid(card_number_generator_setup):
+def test_card_number_generator_valid(card_number_generator_setup: int) -> None:
     """Проверяет генерацию номеров карт в заданном диапазоне."""
     assert card_number_generator_setup == "0000 0000 0000 0001"
 
 
-def test_card_number_generator_formatting(card_number_generator_setup):
+def test_card_number_generator_formatting(card_number_generator_setup: Any) -> None:
     """Проверяет правильное форматирование номеров карт."""
     assert card_number_generator_setup[:4] == "0000"
 
 
 @log(filename="testlog.txt")
-def add(x, y):
+def add(x: int, y: int) -> int:
     return x + y

@@ -3,11 +3,12 @@ import pytest
 from tests.conftest import add
 
 
-def test_add_success(capsys):
+def test_add_success(capsys: str) -> None:
     result = add(2, 3)
     assert result == 5
 
-def test_add_error(capsys):
+
+def test_add_error(capsys: str) -> None:
     with pytest.raises(TypeError):
         add("1", 2)
     assert "my_function error: TypeError. Inputs: (1, 2), {}"

@@ -5,7 +5,7 @@ import pytest
 from src.processing import filter_by_state, sort_by_date
 
 
-def test_filter_by_state_valid(test_data: Any) -> str:
+def test_filter_by_state_valid(test_data: Any) -> None:
     """Проверяет фильтрацию по состоянию."""
     assert filter_by_state(
         [
@@ -21,7 +21,7 @@ def test_filter_by_state_valid(test_data: Any) -> str:
     ]
 
 
-def test_filter_by_state_default_state(test_data: Any) -> str:
+def test_filter_by_state_default_state(test_data: Any) -> None:
     """Проверяет работу с параметром state по умолчанию"""
     assert filter_by_state(
         [
@@ -36,7 +36,7 @@ def test_filter_by_state_default_state(test_data: Any) -> str:
     ]
 
 
-def test_sort_by_date_valid(test_data: Any) -> str:
+def test_sort_by_date_valid(test_data: Any) -> None:
     """Проверяет сортировку по дате в порядке убывания."""
     assert sort_by_date(
         [
@@ -51,7 +51,7 @@ def test_sort_by_date_valid(test_data: Any) -> str:
     ]
 
 
-def test_sort_by_date_reverse(test_data: Any) -> str:
+def test_sort_by_date_reverse(test_data: Any) -> None:
     """Проверяет сортировку по дате в обратном порядке (возрастания)."""
     assert sort_by_date(
         [
@@ -67,7 +67,7 @@ def test_sort_by_date_reverse(test_data: Any) -> str:
     ]
 
 
-def test_filter_by_state_str(test_data: Any) -> str:
+def test_filter_by_state_str(test_data: Any) -> None:
     """Проверяет значение 'state' должно быть строкой"""
     with pytest.raises(TypeError) as exc_info:
         sort_by_date(
@@ -80,7 +80,7 @@ def test_filter_by_state_str(test_data: Any) -> str:
         assert exc_info.value == "Значение 'state' должно быть строкой."
 
 
-def test_sort_by_date_raise(test_data: Any) -> str:
+def test_sort_by_date_raise(test_data: Any) -> None:
     with pytest.raises(TypeError) as exc_info:
         sort_by_date(
             [
