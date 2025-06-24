@@ -18,9 +18,13 @@
    ```
 ## Использование
 
-Виджет предоставляет следующие основные функции:
+### Виджет предоставляет следующие модули и функции:
 
-### 1. `get_mask_card_number(card_number)`
+### 1. Модуль `masks.py` содержит функции:
+
+### `get_mask_card_number(card_number)`
+
+Пример использования:
 
 Функция возвращает замаскированный номер банковской карты, в формате XXXX XX** **** XXXX, где X - цифры.
 
@@ -41,7 +45,7 @@
     print(masked_card)
     >>> 1234 56** ** 3456
 
-### 2. `get_mask_account(check_number)`
+### `get_mask_account(check_number)`
 
 Функция Маскирует номер банковского счета, отображая последние 4 цифры в формате **XXXX.
 
@@ -62,7 +66,9 @@
     print(masked_check_number)
     >>> **4305
 
-### 3. `mask_account_card(type_and_number)`
+### 2. Модуль `widget.py` содержит функции:
+
+### `mask_account_card(type_and_number)`
 
 Функция маскирует номер карты или счета в зависимости от типа.
 
@@ -83,7 +89,7 @@
     print(masked_account_type_number)
     >>> Visa Platinum 7000 79** **** 6361
 
-### 4. `get_date(data_card_number)`
+### `get_date(data_card_number)`
 
 Функция возвращает строку с датой в формате 'ДД.ММ.ГГГГ'.
 
@@ -104,7 +110,9 @@
     print(new_account_data)
     >>> 11.03.2024
 
-### 5. `filter_by_state(data, state="EXECUTED")`
+### 3. Модуль `processing.py` содержит функции:
+
+### `filter_by_state(data, state="EXECUTED")`
 
 Функция фильтрует список словарей, возвращая только те, у которых значение ключа 'state' соответствует заданному.
 
@@ -129,7 +137,7 @@
     print(executed_items)
     >>> [{'id': 1, 'state': 'EXECUTED'}, {'id': 3, 'state': 'EXECUTED'}]
 
-### 6. `sort_by_date(data, reverse=True)`
+### `sort_by_date(data, reverse=True)`
 
 Функция сортирует список словарей по значению ключа 'date' (в формате YYYY-MM-DD).
 
@@ -159,7 +167,9 @@
          {'id': 594226727, 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689'},
          {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'}]
 
-### 7. `filter_by_currency(transactions: List[Dict[str, Any]], currency: str)`
+### 4. Модуль `generators.py` содержит функции:
+
+### `filter_by_currency(transactions: List[Dict[str, Any]], currency: str)`
 
 Функция фильтрует транзакции по заданной валюте и возвращает итератор, который последовательно выдает только те транзакции, где валюта соответствует заданному значению.
 
@@ -182,7 +192,7 @@
         {'id': 895315941, 'state': 'EXECUTED', 'date': '2018-08-19T04:27:37.904916', 'operationAmount': {'amount': '56883.54', 'currency': {'name': 'USD', 'code': 'USD'}}, 'description': 'Перевод с карты на карту', 'from': 'Visa Classic 6831982476737658', 'to': 'Visa Platinum 8990922113665229'}
     
 
-### 8. `transaction_descriptions(transactions: List[Dict[str, Any]])`
+### `transaction_descriptions(transactions: List[Dict[str, Any]])`
 
 Функция генерирует описания транзакций из списка словарей с транзакциями.
 
@@ -205,8 +215,7 @@
         Перевод с карты на карту
         Перевод организации
     
-
-### 9. `card_number_generator(start: int, end: int)`
+### `card_number_generator(start: int, end: int)`
 
 Генератор, который создает номера банковских карт в формате XXXX XXXX XXXX XXXX в заданном диапазоне.
 
@@ -229,7 +238,9 @@
         0000 0000 0000 0004
         0000 0000 0000 0005
 
-### 10. `log(filename="my_log.txt")`
+### 5. Модуль `decorators.py` содержит функции:
+
+### `log(filename="log.txt")`
 
 Декоратор для логирования вызова функции.
 
@@ -259,37 +270,24 @@
 
 ```python
 @log()
-def add(x, y):
-    """Складывает два числа."""
+def my_func(x, y):
+    """Складывает два числа в консоль."""
     return x + y
 
-@log()
-def divide(x, y):
-    """Делит одно число на другое."""
-    if y == 0:
-        raise ZeroDivisionError("Деление на ноль!")
-    return x / y
-
-result1 = add(5, 3)
-print(f"Результат add: {result1}")
-
-try:
-    result2 = divide(10, 0)
-    print(f"Результат divide: {result2}")
-except ZeroDivisionError as e:
-    print(f"Поймано исключение: {e}")
+print(my_func(5, 3)
+>>> 8
 ```
 
 ### Пример 2: Логирование в файл "my_log.txt"
 
 ```python
 @log(filename="my_log.txt")
-def multiply(a, b):
-    """Умножает два числа."""
-    return a * b
+def my_func(x, y):
+    """Складывает два числа в файл."""
+    return X + Y
 
-result3 = multiply(4, 6)
-print(f"Результат multiply: {result3}")
+print(my_func(5, 3)
+>>> добавляется файл log.txt с значением "8"
 ```
 
 **Как это работает (пример с выводом в консоль):**

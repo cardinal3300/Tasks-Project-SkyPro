@@ -1,31 +1,36 @@
-import functools
-from typing import Any, Callable
+from typing import Any, Callable, Optional
 
 
-def log(filename: str) -> Callable:
+def message_log(message: str, filename: Optional[str] = None) -> None:
+    """Функция для логирования записи в файл"""
+    if filename:
+        with open(filename, "a", encoding="UTF-8") as file:
+            file.write(message)
+    else:
+        print(message)
+
+
+def log(filename: Optional[str] = None) -> Callable:
     """Декоратор для логирования вызова функции"""
 
     def decorator(func: Callable) -> Callable:
-        @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             try:
                 result = func(*args, **kwargs)
-                with open(filename, "a", encoding="UTF-8") as file:
-                    file.write(f"{func.__name__} ok\n")
+                message = f"{func.__name__} - ok - {result}\n"
+                message_log(message, filename)
                 return result
             except Exception as e:
-                with open(filename, "a", encoding="UTF-8") as file:
-                    file.write(f"{func.__name__} error: {type(e).__name__}. Inputs: {args}, {kwargs}\n")
+                message = f"{func.__name__}: - {type(e)} - args: {args} - kwargs: {kwargs}\n"
+                message_log(message, filename)
                 raise
 
         return wrapper
 
     return decorator
 
-
-@log(filename="mylog.txt")
-def my_function(x: int, y: int) -> int:
+@log(filename="log.txt")
+def my_func(x, y):
     return x + y
 
-
-print(my_function(1, 2))
+my_func(2, 3)
