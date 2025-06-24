@@ -101,4 +101,3 @@ def test_card_number_generator_valid(card_number_generator_setup: int) -> None:
 def test_card_number_generator_formatting(card_number_generator_setup: Any) -> None:
     """Проверяет правильное форматирование номеров карт."""
     assert card_number_generator_setup[:4] == "0000"
-
