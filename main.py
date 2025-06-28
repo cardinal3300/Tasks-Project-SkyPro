@@ -68,23 +68,23 @@ transactions = [
 
 if __name__ == "__main__":
     print(get_mask_card_number("123456"))
-    # print(get_mask_account("123jlkhb123"))
-    # print(mask_account_card("Счет 14211924144426031657"))
-    # print(get_date("2024-03-11T02:26:18.671407"))
-    # print(get_date(20240311022618671407))
-    # print(filter_by_state(state_opration, state="CANCELED"))
-    # print(sort_by_date(state_opration, reverse=False))
-    #
-    # usd_transactions = filter_by_currency(transactions, "USD")
-    # for _ in range(3):
-    #     print(next(usd_transactions))
-    #
+    print(get_mask_account("123jlkhb123"))
+    print(mask_account_card("Счет 14211924144426031657"))
+    print(get_date("2024-03-11T02:26:18.671407"))
+    print(get_date(20240311022618671407))
+    print(filter_by_state(state_opration, state="CANCELED"))
+    print(sort_by_date(state_opration, reverse=False))
+
+    usd_transactions = filter_by_currency(transactions, "USD")
+    for _ in range(3):
+        print(next(usd_transactions))
+
     descriptions = transaction_descriptions(transactions)
     for _ in range(3):
         print(next(descriptions))
 
     for card_number in card_number_generator(1, 3):
         print(card_number)
-    #
-    # number = 1234567890123456
-    # print(format_card_number(number))
+
+    number = 1234567890123456
+    print(format_card_number(number))
