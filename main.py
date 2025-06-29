@@ -1,12 +1,10 @@
 import os
 import sys
 
-
 from src.masks import get_mask_card_number, get_mask_account
 from src.widget import mask_account_card, get_date
 from src.processing import filter_by_state, sort_by_date
 from src.generators import filter_by_currency, transaction_descriptions, card_number_generator, format_card_number
-
 
 # Добавляем путь к папке src
 sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
@@ -74,17 +72,15 @@ if __name__ == "__main__":
     print(get_date(20240311022618671407))
     print(filter_by_state(state_opration, state="CANCELED"))
     print(sort_by_date(state_opration, reverse=False))
-
     usd_transactions = filter_by_currency(transactions, "USD")
     for _ in range(3):
         print(next(usd_transactions))
-
     descriptions = transaction_descriptions(transactions)
     for _ in range(3):
         print(next(descriptions))
 
     for card_number in card_number_generator(1, 3):
         print(card_number)
-
     number = 1234567890123456
     print(format_card_number(number))
+

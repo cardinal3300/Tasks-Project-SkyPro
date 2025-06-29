@@ -1,37 +1,31 @@
 import json
-import os
-from typing import Dict, Union
-import requests
-
+from src.external_api import convert_currency
 
 def reading_json_file(file_path: str) -> list[dict]:
     """ Функция принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях"""
-    transactions: list = []
     try:
-
-        if not os.path.exists(file_path):
-            print(f"WARNING: File not found: {file_path}")
-            return transactions
-
         with open(file_path, 'r', encoding="utf-8") as file:
-            try:
-                data = json.load(file)
-            except json.JSONDecodeError:
-                print(f"WARNING: Invalid JSON format in: {file_path}")
-                return transactions
-
-        if not isinstance(data, list):
-            print(f"WARNING: JSON data is not a list in: {file_path}")
-            return transactions
-
-        if not data:
-            print(f"INFO: File is empty: {file_path}")
-            return transactions
-
-        transactions = data
-
-    except IOError as e:
-        print(f"ERROR: An I/O error occurred: {e}")
+            data = json.load(file)
+            if isinstance(data, list):
+                return data
+            else:
+                return []
+    except FileNotFoundError:
+        return []
+    except json.JSONDecodeError:
         return []
 
-    return transactions
+#print(reading_json_file('../data/operations.json'))
+
+def convert_to_rub(operation: dict) -> float:
+    """Функция конвертирования в рубли."""
+    try:
+        if operation["operationAmount"]["currency"]["code"] == "RUB":
+            return float(operation["operationAmount"]["amount"])
+        else:
+            operation_currency = operation["operationAmount"]["currency"]["code"]
+            operation_amount = operation["operationAmount"]["amount"]
+            return float(convert_currency(operation_currency, operation_amount))
+    except (KeyError, ValueError):
+        return 0.0
+

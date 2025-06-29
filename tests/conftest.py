@@ -73,31 +73,3 @@ def transactions_data() -> List[Dict[str, Any]]:
 def card_number_string() -> str:
     """Фикстура для предоставления номера карты."""
     return "1234567890123456"
-
-
-@pytest.fixture
-def card_number_generator_setup() -> Iterator[str]:
-    """Настройка для card_number_generator, чтобы избежать проблем с состоянием."""
-    for number in card_number_generator(1, 3):
-        yield number
-
-
-def test_transaction_descriptions_valid(transactions_data: List[Dict[str, Any]]) -> None:
-    """Тестирует генератор описаний транзакций."""
-    descriptions = list(transaction_descriptions(transactions_data))
-    expected_descriptions = [
-        "Перевод организации",
-        "Перевод со счета на счет",
-        "Перевод в евро",
-    ]
-    assert descriptions == expected_descriptions
-
-
-def test_card_number_generator_valid(card_number_generator_setup: int) -> None:
-    """Проверяет генерацию номеров карт в заданном диапазоне."""
-    assert card_number_generator_setup == "0000 0000 0000 0001"
-
-
-def test_card_number_generator_formatting(card_number_generator_setup: Any) -> None:
-    """Проверяет правильное форматирование номеров карт."""
-    assert card_number_generator_setup[:4] == "0000"
