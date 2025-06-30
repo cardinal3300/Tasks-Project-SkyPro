@@ -1,10 +1,12 @@
 import json
+
 from src.external_api import convert_currency
 
+
 def reading_json_file(file_path: str) -> list[dict]:
-    """ Функция принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях"""
+    """Функция принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях"""
     try:
-        with open(file_path, 'r', encoding="utf-8") as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             data = json.load(file)
             if isinstance(data, list):
                 return data
@@ -15,7 +17,9 @@ def reading_json_file(file_path: str) -> list[dict]:
     except json.JSONDecodeError:
         return []
 
-#print(reading_json_file('../data/operations.json'))
+
+# print(reading_json_file('../data/operations.json'))
+
 
 def convert_to_rub(operation: dict) -> float:
     """Функция конвертирования в рубли."""
@@ -28,4 +32,3 @@ def convert_to_rub(operation: dict) -> float:
             return float(convert_currency(operation_currency, operation_amount))
     except (KeyError, ValueError):
         return 0.0
-

@@ -1,10 +1,14 @@
 import os
 import sys
 
+
 from src.masks import get_mask_card_number, get_mask_account
 from src.widget import mask_account_card, get_date
 from src.processing import filter_by_state, sort_by_date
 from src.generators import filter_by_currency, transaction_descriptions, card_number_generator, format_card_number
+from src.utils import reading_json_file, convert_to_rub
+from src.external_api import convert_currency
+
 
 # Добавляем путь к папке src
 sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
@@ -64,6 +68,7 @@ transactions = [
     },
 ]
 
+
 if __name__ == "__main__":
     print(get_mask_card_number("123456"))
     print(get_mask_account("123jlkhb123"))
@@ -78,9 +83,18 @@ if __name__ == "__main__":
     descriptions = transaction_descriptions(transactions)
     for _ in range(3):
         print(next(descriptions))
-
     for card_number in card_number_generator(1, 3):
         print(card_number)
     number = 1234567890123456
-    print(format_card_number(number))
-
+    print(format_card_number(1234567891011121))
+    print(convert_to_rub({
+    "id": 27192367,
+    "state": "CANCELED",
+    "date": "2018-12-24T20:16:18.819037",
+    "operationAmount": {
+      "amount": "991.49",
+      "currency": {
+        "name": "руб.",
+        "code": "RUB"
+    },},}))
+    print(convert_currency("USD", 100.0))

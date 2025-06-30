@@ -1,11 +1,15 @@
+from typing import Union, Never
+
 import pytest
+
+from typing import Union
 
 from src.decorators import log
 
 
-def test_log_error_console(capsys):
+def test_log_error_console(capsys: Union) -> None:
     @log()
-    def my_func(x, y):
+    def my_func(x: int, y: Union) -> None:
         return x + y
 
     with pytest.raises(TypeError):
@@ -14,20 +18,20 @@ def test_log_error_console(capsys):
     assert "my_func: - <class 'TypeError'> - args: (2, '3') - kwargs: {}\n\n" == captured.out
 
 
-def test_log_accept_console(capsys):
+def test_log_accept_console(capsys: Union) -> None:
     @log()
-    def my_func(x, y):
+    def my_func() -> int:
         return 2 + 3
 
     assert "my_func - ok - 5" == "my_func - ok - 5"
 
 
-def test_log_accept_file(capsys):
+def test_log_accept_file(capsys: Union) -> None:
 
     file_name = "tests/test.txt"
 
     @log(filename=file_name)
-    def my_func(x, y):
+    def my_func(x: int, y: int) -> int:
         return x + y
 
     result = my_func(2, 3)

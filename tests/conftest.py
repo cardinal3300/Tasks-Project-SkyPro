@@ -1,11 +1,6 @@
-from typing import Any, Dict, Iterator, List
+from typing import Any, Dict, List
 
 import pytest
-
-from src.generators import (
-    card_number_generator,
-    transaction_descriptions,
-)
 
 
 @pytest.fixture
