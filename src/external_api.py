@@ -19,3 +19,16 @@ def convert_currency(currency: str, amount: float) -> float:
     response = requests.request("GET", url, headers=headers, data=payload)
 
     return float(response.json().get("result"))
+
+
+def convert_to_rub(operation: dict) -> float:
+    """Функция конвертирования в рубли."""
+    try:
+        if operation["operationAmount"]["currency"]["code"] == "RUB":
+            return float(operation["operationAmount"]["amount"])
+        else:
+            operation_currency = operation["operationAmount"]["currency"]["code"]
+            operation_amount = operation["operationAmount"]["amount"]
+            return float(convert_currency(operation_currency, operation_amount))
+    except (KeyError, ValueError):
+        return 0.0

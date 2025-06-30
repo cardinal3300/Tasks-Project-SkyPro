@@ -6,8 +6,7 @@ from src.masks import get_mask_card_number, get_mask_account
 from src.widget import mask_account_card, get_date
 from src.processing import filter_by_state, sort_by_date
 from src.generators import filter_by_currency, transaction_descriptions, card_number_generator, format_card_number
-from src.utils import reading_json_file, convert_to_rub
-from src.external_api import convert_currency
+from src.external_api import convert_currency, convert_to_rub
 
 
 # Добавляем путь к папке src

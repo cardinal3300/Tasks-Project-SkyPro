@@ -1,8 +1,6 @@
-from typing import Union, Never
+from typing import Never, Union
 
 import pytest
-
-from typing import Union
 
 from src.decorators import log
 
