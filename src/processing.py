@@ -15,8 +15,6 @@ def sort_by_date(data: List[Dict[str, Any]], reverse: bool = True) -> List[Dict[
     """Сортирует список словарей по значению ключа 'date' (в формате YYYY-MM-DD)"""
     # Проверка наличия ключа 'date' и его типа.
     for item in data:
-        if "date" not in item:
-            raise TypeError("У всех словарей должен быть ключ 'date'.")
-        if not isinstance(item["date"], str):
-            raise TypeError("Значение 'date' должно быть строкой.")
-    return sorted(data, key=lambda x: x["date"], reverse=reverse)
+        if "data" not in item:
+            raise TypeError("Отсутствует ключ 'data'.")
+    return sorted(data, key=lambda x: x["data"], reverse=reverse)

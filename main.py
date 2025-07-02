@@ -1,22 +1,22 @@
 import os
 import sys
 
-
 from src.masks import get_mask_card_number, get_mask_account
 from src.widget import mask_account_card, get_date
 from src.processing import filter_by_state, sort_by_date
 from src.generators import filter_by_currency, transaction_descriptions, card_number_generator, format_card_number
 from src.external_api import convert_currency, convert_to_rub
+from src.utils import reading_json_file
 
 
 # Добавляем путь к папке src
 sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 
 state_opration = [
-    {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
+    {"id": 41428829, "state": "EXECUTED", "data": "2019-07-03T18:35:29.512364"},
     {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
-    {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
-    {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
+    {"id": 594226727, "state": "CANCELED", "data": "2018-09-12T21:27:25.241689"},
+    {"id": 615064591, "state": "CANCELED", "data": "2018-10-14T21:33:41.9441"},
 ]
 
 transactions = [
@@ -69,31 +69,29 @@ transactions = [
 
 
 if __name__ == "__main__":
-    print(get_mask_card_number("123456"))
-    print(get_mask_account("123jlkhb123"))
-    print(mask_account_card("Счет 14211924144426031657"))
-    print(get_date("2024-03-11T02:26:18.671407"))
-    print(get_date(20240311022618671407))
-    print(filter_by_state(state_opration, state="CANCELED"))
+    # print(get_mask_card_number("123456"))
+    # print(get_mask_account("123jlkhb123"))
+    # print(mask_account_card("Счет 14211924144426031657"))
+    # print(get_date("2024-03-11T02:26:18.671407"))
+    # print(get_date(20240311022618671407))
+    # print(filter_by_state(state_opration, state="CANCELED"))
     print(sort_by_date(state_opration, reverse=False))
-    usd_transactions = filter_by_currency(transactions, "USD")
-    for _ in range(3):
-        print(next(usd_transactions))
-    descriptions = transaction_descriptions(transactions)
-    for _ in range(3):
-        print(next(descriptions))
-    for card_number in card_number_generator(1, 3):
-        print(card_number)
-    number = 1234567890123456
-    print(format_card_number(1234567891011121))
-    print(convert_to_rub({
-    "id": 27192367,
-    "state": "CANCELED",
-    "date": "2018-12-24T20:16:18.819037",
-    "operationAmount": {
-      "amount": "991.49",
-      "currency": {
-        "name": "руб.",
-        "code": "RUB"
-    },},}))
-    print(convert_currency("USD", 100.0))
+    #
+    # usd_transactions = filter_by_currency(transactions, "USD")
+    # for _ in range(3):
+    #     print(next(usd_transactions))
+    #
+    # descriptions = transaction_descriptions(transactions)
+    # for _ in range(3):
+    #     print(next(descriptions))
+    #
+    # for card_number in card_number_generator(11115, 11119):
+    #     print(card_number)
+    #
+    # print(format_card_number(1234567891011121))
+    #
+    # print(convert_currency("USD", 100.0))
+    # print(reading_json_file("data/operations.json"))
+    # print(convert_to_rub(reading_json_file("data/operations.json")[1]))
+
+
