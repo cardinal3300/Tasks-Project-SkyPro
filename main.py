@@ -75,7 +75,7 @@ if __name__ == "__main__":
     # print(get_date("2024-03-11T02:26:18.671407"))
     # print(get_date(20240311022618671407))
     # print(filter_by_state(state_opration, state="CANCELED"))
-    print(sort_by_date(state_opration, reverse=False))
+    # print(sort_by_date(state_opration, reverse=False))
     #
     # usd_transactions = filter_by_currency(transactions, "USD")
     # for _ in range(3):
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     # print(format_card_number(1234567891011121))
     #
     # print(convert_currency("USD", 100.0))
-    # print(reading_json_file("data/operations.json"))
+    print(reading_json_file("data/operations.json"))
     # print(convert_to_rub(reading_json_file("data/operations.json")[1]))
 
 

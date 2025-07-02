@@ -1,6 +1,8 @@
 import json
 import logging
 
+# Объект логера:
+
 logger = logging.getLogger()
 file_handler = logging.FileHandler("logs/utils.log", "w", encoding="utf-8")
 file_formatter = logging.Formatter("%(asctime)s %(filename)s %(levelname)s: %(message)s")
@@ -20,11 +22,11 @@ def reading_json_file(file_path: str) -> list[dict]:
                 logger.info("Файл получен, всё ок")
                 return data
             else:
-                logger.info("Файл не список!")
+                logger.error("Файл не список!")
                 return []
     except FileNotFoundError:
-        logger.info("Файл не найден")
+        logger.error("Файл не найден")
         return []
     except json.JSONDecodeError:
-        logger.info("Файл не преобразовался в Python файл")
+        logger.error("Файл не преобразовался в Python файл")
         return []
