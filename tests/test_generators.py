@@ -28,9 +28,6 @@ def test_filter_by_currency_parameterized(
     assert actual_ids == expected_ids
 
 
-# 1. Тестирование функции filter_by_currency
-
-
 def test_filter_by_currency_valid() -> None:
     """Проверяет фильтрацию транзакций по валюте."""
     transactions = [
@@ -60,9 +57,6 @@ def test_filter_by_currency_no_matching_currency() -> None:
     assert usd_transactions == []
 
 
-# 2. Тестирование функции transaction_descriptions
-
-
 def test_transaction_descriptions_valid() -> None:
     """Проверяет, что функция возвращает корректные описания транзакций."""
     transactions = [
@@ -76,6 +70,17 @@ def test_transaction_descriptions_valid() -> None:
         "Перевод со счета на счет",
         "Перевод с карты на карту",
     ]
+
+
+def test_generator_transaction_descriptions_valid(transactions_data: List[Dict[str, Any]]) -> None:
+    """Тестирует генератор описаний транзакций."""
+    descriptions = list(transaction_descriptions(transactions_data))
+    expected_descriptions = [
+        "Перевод организации",
+        "Перевод со счета на счет",
+        "Перевод в евро",
+    ]
+    assert descriptions == expected_descriptions
 
 
 def test_transaction_descriptions_empty() -> None:
@@ -108,11 +113,8 @@ def test_card_number_generator_valid() -> None:
     assert generated_numbers[2] == "0000 0000 0000 0003"
 
 
-# 3. Тестирование генератора card_number_generator
-
-
 def test_card_number_generator_formatting() -> None:
-    """Проверяет правильное форматирование номеров карт."""
+    """Проверяет форматирование номеров карт в формате ХХХХ ХХХХ ХХХХ ХХХХ."""
     number = 1234567890123456
     formatted_number = format_card_number(number)
     assert formatted_number == "1234 5678 9012 3456"

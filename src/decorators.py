@@ -29,8 +29,10 @@ def log(filename: Optional[str] = None) -> Callable:
 
     return decorator
 
+
 @log(filename="log.txt")
 def my_func(x: int, y: int) -> int:
     return x + y
+
 
 my_func(2, 3)
