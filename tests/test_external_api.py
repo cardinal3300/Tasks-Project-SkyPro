@@ -26,7 +26,6 @@ def test_convert_currency() -> None:
         ({}, 0.0),
     ),
 )
-
 def test_convert_to_rub(oper_dict: dict, result: int) -> None:
     with patch("requests.request") as mock_get:
         mock_get.return_value.json.return_value = {"result": result}
