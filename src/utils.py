@@ -3,7 +3,7 @@ import logging
 
 # Объект логера:
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 file_handler = logging.FileHandler("logs/utils.log", "w", encoding="utf-8")
 file_formatter = logging.Formatter("%(asctime)s %(filename)s %(levelname)s: %(message)s")
 file_handler.setFormatter(file_formatter)
@@ -20,10 +20,10 @@ def reading_json_file(file_path: str) -> list[dict]:
             data = json.load(file)
             if isinstance(data, list):
                 logger.info("Файл получен, всё ок")
-                return data
-            else:
-                logger.error("Файл не список!")
-                return []
+            return data
+            # else:
+            #     logger.error("Файл не список!")
+            #     return []
     except FileNotFoundError:
         logger.error("Файл не найден")
         return []

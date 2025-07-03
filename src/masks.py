@@ -4,7 +4,7 @@ from typing import Any
 
 # Объект логера:
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 file_handler = logging.FileHandler("logs/masks.log", "w", encoding="utf-8")
 file_formatter = logging.Formatter("%(asctime)s %(filename)s %(levelname)s: %(message)s")
 file_handler.setFormatter(file_formatter)
@@ -16,8 +16,8 @@ def get_mask_card_number(card_number: Any) -> str:
     """Возвращает замаскированный номер банковской карты, в формате XXXX XX** **** XXXX, где X - цифры."""
     logger.info("Запуск функции `get_mask_card_number`")
     if not isinstance(card_number, (str, int)):
-        logger.error("Неверный тип данных. Ожидается строка или число")
-        return "Ошибка: Неверный тип данных. Ожидается строка или число."
+        logger.error("Неверный тип данных. Ожидается строка или целое число")
+        return "Ошибка: Неверный тип данных. Ожидается строка или целое число."
     card_number_str = str(card_number).replace(" ", "")
     if not re.match(r"^\d+$", card_number_str):
         logger.error("Номер карты содержит недопустимые символы")
@@ -35,8 +35,8 @@ def get_mask_account(check_number: Any) -> str:
     """Маскирует номер банковского счета, отображая последние 4 цифры в формате **XXXX."""
     logger.info("Запуск функции `get_mask_account`")
     if not isinstance(check_number, (str, int)):
-        logger.error("Неверный тип данных. Ожидается строка или число")
-        return "Ошибка: Неверный тип данных. Ожидается строка или число."
+        logger.error("Неверный тип данных. Ожидается строка или целое число")
+        return "Ошибка: Неверный тип данных. Ожидается строка или целое число."
     check_number_str = str(check_number).replace(" ", "")
     if not re.match(r"^\d+$", check_number_str):
         logger.error("Номер счета содержит недопустимые символы")

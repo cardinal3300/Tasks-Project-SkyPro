@@ -16,6 +16,16 @@ def test_get_mask_card_number_length(test_data: str) -> None:
     assert get_mask_card_number("123456") == "Ошибка: Некорректная длина номера карты."
 
 
+def test_get_mask_card_number_str_int(test_data: str) -> None:
+    """Проверяет корректные входные данные для get_mask_card_number"""
+    assert get_mask_card_number(1234.56) == "Ошибка: Неверный тип данных. Ожидается строка или целое число."
+
+
+def test_get_mask_account_str_int(test_data: str) -> None:
+    """Проверяет корректные входные данные для get_mask_card_number"""
+    assert get_mask_card_number({123456}) == "Ошибка: Неверный тип данных. Ожидается строка или целое число."
+
+
 def test_get_mask_account_valid(test_data: str) -> None:
     """Проверяет корректное маскирование номера счета."""
     assert get_mask_account("12345678901234567890") == "**7890"
