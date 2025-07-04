@@ -7,7 +7,7 @@ from src.processing import filter_by_state, sort_by_date
 from src.generators import filter_by_currency, transaction_descriptions, card_number_generator, format_card_number
 from src.external_api import convert_currency, convert_to_rub
 from src.utils import reading_json_file
-
+from src.csv_excel import read_csv_transactions, read_excel_transactions
 
 # Добавляем путь к папке src
 sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
@@ -74,7 +74,7 @@ if __name__ == "__main__":
     # print(mask_account_card("Счет 14211924144426031657"))
     # print(get_date("2024-03-11T02:26:18.671407"))
     # print(get_date(20240311022618671407))
-    print(filter_by_state(state_operation, state="CANCELED"))
+    # print(filter_by_state(state_operation, state="CANCELED"))
     # print(sort_by_date(state_operation, reverse=False))
     #
     # usd_transactions = filter_by_currency(transactions, "USD")
@@ -93,5 +93,9 @@ if __name__ == "__main__":
     # print(convert_currency("USD", 100.0))
     # print(reading_json_file("data/operations.json"))
     # print(convert_to_rub(reading_json_file("data/operations.json")[1]))
+    print(read_csv_transactions("data/transactions.csv"))
+    # print(read_excel_transactions("data/transactions_excel.xlsx"))
+
+
 
 
