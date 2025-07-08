@@ -93,8 +93,8 @@ if __name__ == "__main__":
     # print(convert_currency("USD", 100.0))
     # print(reading_json_file("data/operations.json"))
     # print(convert_to_rub(reading_json_file("data/operations.json")[1]))
-    print(read_csv_transactions("data/transactions.csv"))
-    # print(read_excel_transactions("data/transactions_excel.xlsx"))
+    # print(read_csv_transactions("data/transactions.csv"))
+    print(read_excel_transactions("data/transactions_excel.xlsx"))
 
 
 

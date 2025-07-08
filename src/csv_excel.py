@@ -1,7 +1,8 @@
-import csv
-from typing import Any, Dict, List
-
 import pandas as pd
+import csv
+from typing import Any, Dict, List, Hashable
+
+from pandas import DataFrame
 
 
 def read_csv_transactions(file_path: str) -> List[Dict[str, Any]]:
@@ -14,12 +15,10 @@ def read_csv_transactions(file_path: str) -> List[Dict[str, Any]]:
     return transactions
 
 
-def read_excel_transactions(file_path: str) -> List[Dict[str, Any]]:
+def read_excel_transactions(file_path: str) -> List[Dict[Hashable, Any]]:
     """Считывает финансовые операции из файла Excel."""
-    try:
-        df = pd.read_excel(file_path)
-        data = df.to_dict(orient="records")
-        return data
-    except Exception as ex:
-        print(f"Ошибка при чтении Excel файла: {ex}")
-        return []
+    df = pd.read_excel(file_path)
+    df = df.where(pd.notna(df), None)
+    data = df.to_dict(orient="records")
+
+    return data

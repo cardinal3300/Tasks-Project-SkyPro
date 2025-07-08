@@ -393,9 +393,6 @@
     import pandas as pd
     print(read_csv_transactions("../data/transactions.csv"))
 
-
-
-
 ### `read_excel_transactions(file_path: str)
 `
 Функция считывает финансовые операции (транзакции) из EXCEL-файла.
