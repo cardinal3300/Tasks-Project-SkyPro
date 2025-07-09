@@ -238,7 +238,11 @@
         0000 0000 0000 0004
         0000 0000 0000 0005
 
-### 5. Модуль `decorators.py` содержит декоратор:
+### 5. Модуль `decorators.py` содержит функцию и декоратор:
+
+### `message_log`
+
+Функция логирования записи в файл для декоратора `@log()`.
 
 ### `log(filename="log.txt")`
 
@@ -307,7 +311,7 @@
 
 Этот код предоставляет готовую основу для логирования, которую можно легко адаптировать.
 
-### 5. Модуль `utils.py` содержит функции:
+### 6. Модуль `utils.py` содержит функцию:
 
 ### `reading_json_file((file_path: str)`
 
@@ -321,7 +325,7 @@
 
     *   `list[dict]:`  Cписок словарей с данными о финансовых транзакциях   
 
-### 5. Модуль `external_api.py` содержит функцию:
+### 7. Модуль `external_api.py` содержит функции:
 
 ### `convert_currency(currency: str, amount: float)`
 
@@ -367,32 +371,78 @@
     "code": "RUB"}}}))
     >>> 991.49
     
+### 8. Модуль `csv_excel.py` содержит функции:
+
+### `read_csv_transactions(file_path: str)
+`
+Функция считывает финансовые операции (транзакции) из CSV-файла.
+
+*   **Параметры**
+
+    *   `file_path (str):` Путь до файла .csv (по умолчанию в этом проекте `'data/transactions.csv'`).
+
+*   **Возвращаемое значение**
+
+    *   `List[Dict]:`  Cписок словарей с данными о финансовых транзакциях   
+
+*   **Пример:**
+
+    ```python
+    import csv
+    from typing import Dict, List
+    import pandas as pd
+    print(read_csv_transactions("../data/transactions.csv"))
+
+### `read_excel_transactions(file_path: str)
+`
+Функция считывает финансовые операции (транзакции) из EXCEL-файла.
+
+*   **Параметры**
+
+    *   `file_path (str):` Путь до файла .csv (по умолчанию в этом проекте `'data/transactions_excel.xlsx'`).
+
+*   **Возвращаемое значение**
+
+    *   `List[Dict]:`  Cписок словарей с данными о финансовых транзакциях
+
+*   **Пример:**
+
+    ```python
+    import csv
+    from typing import Dict, List
+    import pandas as pd
+    print(read_csv_transactions("../data/transactions_excel.xlsx"))
+
 ## Тестирование
 
 Для обеспечения надежности и качества вашего кода, были разработаны тесты с использованием pytest.
 
-### Установка pytest и pytest-cov
+### Установка библиотек и зависимостей, которые понадобятся для этого проекта:
 
-1. Установите `pytest` и `pytest-cov`, выполнив команду:
-    ```
-   pip install pytest pytest-cov
-   ```
+#### Сделать:
+`pip freeze > requirements.txt`
+*   **pytest** - `pip install pytest`
+*   **pytest-cov** - `pip install pytest-cov`
+*   **pandas** - `poetry add pandas`
+*   **requests** - `pip install requests`
+*   **openpyxl** - `pip install openpyxl`
+*   **coverage** - `pip install coverage`
+#### линтеры
+*   **black** - `pip install black`
+*   **isort** - `pip install isort`
+*   **flake8** - `pip install flake8`
+*   **mypy** - `pip install mypy`
+
 ### Запуск тестов
 
 1. Перейдите в каталог с вашим проектом в терминале.
-2. Запустите все тесты, выполнив команду:
-   
-3. ```
-   pytest -v --cov=your_module --cov-report=term-missing
-   ```
-   
-   ```
-   pytest --cov=src --cov-report=html
-   ```
+2. Запустите все тесты, выполнив команду: `pytest`
+3. Генерация отчетов о покрытии:
 
-Заменив `your_module` на имя вашего модуля Python (без расширения `.py`).
 * `-v`: (verbose) - отображает подробную информацию о прохождении тестов.
 * `--cov=your_module`: Указывает `pytest-cov` анализировать покрытие кода для вашего модуля.
+
+   Заменив `your_module` на имя вашего модуля Python (без расширения `.py`).
 * `--cov-report=term-missing`: Отображает строки кода, которые не были покрыты тестами.
 * `--cov=src --cov-report=html`: Создаёт файл HTMLCOV в корне проекта со всеми параметрами тестов.
 

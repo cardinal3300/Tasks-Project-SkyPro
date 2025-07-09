@@ -1,4 +1,4 @@
-from typing import Never, Union
+from typing import Union
 
 import pytest
 
