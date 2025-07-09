@@ -2,7 +2,7 @@ from typing import Any, Callable, Optional
 
 
 def message_log(message: str, filename: Optional[str] = None) -> None:
-    """Функция для логирования записи в файл"""
+    """Функция для логирования записи в файл."""
     if filename:
         with open(filename, "a", encoding="UTF-8") as file:
             file.write(message)
@@ -11,7 +11,7 @@ def message_log(message: str, filename: Optional[str] = None) -> None:
 
 
 def log(filename: Optional[str] = None) -> Callable:
-    """Декоратор для логирования вызова функции"""
+    """Декоратор для логирования вызова функции."""
 
     def decorator(func: Callable) -> Callable:
         def wrapper(*args: Any, **kwargs: Any) -> Any:

@@ -383,13 +383,13 @@
 
 *   **Возвращаемое значение**
 
-    *   `List[Dict[str, Any]]:`  Cписок словарей с данными о финансовых транзакциях   
+    *   `List[Dict]:`  Cписок словарей с данными о финансовых транзакциях   
 
 *   **Пример:**
 
     ```python
     import csv
-    from typing import Any, Dict, List
+    from typing import Dict, List
     import pandas as pd
     print(read_csv_transactions("../data/transactions.csv"))
 
@@ -403,13 +403,13 @@
 
 *   **Возвращаемое значение**
 
-    *   `List[Dict[str, Any]]:`  Cписок словарей с данными о финансовых транзакциях
+    *   `List[Dict]:`  Cписок словарей с данными о финансовых транзакциях
 
 *   **Пример:**
 
     ```python
     import csv
-    from typing import Any, Dict, List
+    from typing import Dict, List
     import pandas as pd
     print(read_csv_transactions("../data/transactions_excel.xlsx"))
 
@@ -426,7 +426,6 @@
 *   **pandas** - `poetry add pandas`
 *   **requests** - `pip install requests`
 *   **openpyxl** - `pip install openpyxl`
-*   **testpaths** - `pip install testpaths`
 *   **coverage** - `pip install coverage`
 #### линтеры
 *   **black** - `pip install black`
