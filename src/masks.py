@@ -34,9 +34,6 @@ def get_mask_card_number(card_number: Any) -> str:
 def get_mask_account(check_number: Any) -> str:
     """Маскирует номер банковского счета, отображая последние 4 цифры в формате **XXXX."""
     logger.info("Запуск функции `get_mask_account`")
-    if not isinstance(check_number, (str, int)):
-        logger.error("Неверный тип данных. Ожидается строка или целое число")
-        return "Ошибка: Неверный тип данных. Ожидается строка или целое число."
     check_number_str = str(check_number).replace(" ", "")
     if not re.match(r"^\d+$", check_number_str):
         logger.error("Номер счета содержит недопустимые символы")
