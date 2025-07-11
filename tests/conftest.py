@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 import pytest
 
@@ -22,7 +22,7 @@ def test_data() -> Dict[str, Any]:
 
 
 @pytest.fixture
-def transactions_data() -> List[Dict[str, Any]]:
+def transactions_data() -> list[dict]:
     """Предоставляет тестовые данные для транзакций."""
     return [
         {

@@ -1,7 +1,7 @@
 from typing import Generator
 
 
-def filter_by_currency(transactions: list, currency: str) -> Generator[list]:
+def filter_by_currency(transactions: list[dict], currency: str) -> Generator:
     """Возвращает генератор только по тем транзакциям, где валюта соответствует заданной."""
     for transaction in transactions:
         if transaction.get("operationAmount", {}).get("currency", {}).get("code", {}) == currency:

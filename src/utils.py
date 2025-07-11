@@ -1,9 +1,9 @@
 import json
-import re
 import logging
+import re
 from collections import Counter
 
-#Объект логера:
+# Объект логера:
 
 
 logger = logging.getLogger(__name__)
@@ -32,7 +32,7 @@ def reading_json_file(file_path: str) -> list[dict]:
         return []
 
 
-def process_bank_search(operations:list[dict], search:str) -> list[dict]:
+def process_bank_search(operations: list[dict], search: str) -> list[dict]:
     """Функция, возвращающая список словарей, у которых в описании есть строка от пользователя."""
     result: list[dict] = []
     re_pattern = re.compile(search, re.IGNORECASE)

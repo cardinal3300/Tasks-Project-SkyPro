@@ -2,7 +2,6 @@ import os
 import sys
 from typing import Any
 
-from pycodestyle import continued_indentation
 
 from src.masks import get_mask_card_number, get_mask_account
 from src.widget import mask_account_card, get_date
@@ -19,7 +18,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 
 def main() -> list[list] | list[dict] | list[Any] | None:
     """Главная функция отвечающая за основную логику проекта."""
-    transaction_data: list = []
+    transaction_data: list[dict] = []
 
     print("""
     Привет! Добро пожаловать в программу работы
@@ -44,6 +43,8 @@ def main() -> list[list] | list[dict] | list[Any] | None:
         transaction_data = read_excel_transactions("data/transactions_excel.xlsx")
         print("Для обработки выбран EXCEL-файл.")
 
+    print(transaction_data)
+
     print("""
     Введите статус, по которому необходимо выполнить фильтрацию.
     Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING""")
@@ -61,40 +62,57 @@ def main() -> list[list] | list[dict] | list[Any] | None:
         transaction_data = filter_by_state(transaction_data, state=user_status)
         print("Операции отфильтрованы по статусу 'PENDING'")
 
+    print(transaction_data)
+
     print("Отсортировать операции по дате? Да/Нет")
-    user_date: str = input().lower()
+    user_date: str = input("Введите 'Да' или 'Нет': ").title()
+    while user_date not in ("Да", "Нет"):
+        user_date = input("Неверно! Введите 'Да' или 'Нет': ").title()
     if user_date == "Да":
-        print("Отсортировать по возрастанию или по убыванию?")
-        if user_date == "по возрастанию":
+        user_date_1 = input("Отсортировать 'по возрастанию' или 'по убыванию'?: ").lower()
+        while user_date_1 not in ("по возрастанию", "по убыванию"):
+            user_date_1 = input("Неверно! Введите 'по возрастанию' или 'по убыванию': ").lower()
+        if user_date_1 == "по возрастанию":
             transaction_data = sort_by_date(transaction_data, False)
-        elif user_date == "по убыванию":
+        elif user_date_1 == "по убыванию":
             transaction_data = sort_by_date(transaction_data)
     elif user_date == "Нет":
-        return transaction_data
+        print("Продолжаем...")
+
+    print(transaction_data)
 
     print("Выводить только рублевые транзакции? Да/Нет")
     user_transaction: str = input().title()
     while user_transaction not in ("Да", "Нет"):
-        if user_transaction == "Да":
-            transaction_data = list(filter_by_currency(transaction_data, "RUB"))
-        elif user_transaction == "Нет":
-            transaction_data = list(filter_by_currency(transaction_data, "USD"))
-        else:
-            return transaction_data
+        user_transaction = input("Неверно! Введите 'Да' или 'Нет': ").title()
+    if user_transaction == "Да":
+        transaction_data = list(filter_by_currency(transaction_data, "RUB"))
+    elif user_transaction == "Нет":
+        print("Продолжаем...")
+
+    print(transaction_data)
 
     print("Отфильтровать список транзакций по определенному слову в описании? Да/Нет")
-    user_to_word: str = input().title()
-    if user_to_word == "Да":
-        user_to_search = input("Введите слово для поиска: ")
-        transaction_data = list(process_bank_search(transaction_data, user_to_search))
+    user_word: str = input().title()
+    while user_word not in ("Да", "Нет"):
+        user_word = input("Неверно! Введите 'Да' или 'Нет': ").title()
+    if user_word == "Да":
+        user_to_word_1 = input("Введите определённое слово или начало слова...: ")
+        transaction_data = process_bank_search(transaction_data, user_to_word_1)
+    elif user_word == "Нет":
+        print("Продолжаем...")
 
+    print(transaction_data)
 
     print("Распечатываю итоговый список транзакций...")
     print(f"Всего банковских операций в выборке: {len(transaction_data)}")
     for item in transaction_data:
+        print(f"{get_date(item["date"])} {item["description"]}\n"
+              f"{mask_account_card(item["to"])}\n"
+              f"сумма {item["amount"]} {item["currency_name"]}"
+              )
 
-
-
+    return None
 
 
 if __name__ == "__main__":
@@ -189,31 +207,33 @@ if __name__ == "__main__":
 #   }
 # ]
 #
-#
+
 # if __name__ == "__main__":
 #     print(get_mask_card_number("123456"))
-#     print(get_mask_account({123123}))
-#     print(mask_account_card("Счет 14211924144426031657"))
-#     print(get_date("2024-03-11T02:26:18.671407"))
-#     print(get_date(20240311022618671407))
-#     print(filter_by_state(state_operation, state="CANCELED"))
-#     print(sort_by_date(state_operation, reverse=False))
-#
-#     usd_transactions = filter_by_currency(transactions, "Rub")
-#     for _ in range(2):
-#         print(next(usd_transactions))
-#
+#     print(get_mask_account("14211924144426031657"))
+#     print(mask_account_card(14211924144426031657))
+#     print(mask_account_card("visa Platinum 8990922113665229"))
+
+    # print(get_date("2024-03-11T02:26:18.671407"))
+    # print(get_date(20240311022618671407))
+    # print(filter_by_state(state_operation, state="CANCELED"))
+    # print(sort_by_date(state_operation, reverse=False))
+    #
+    # usd_transactions = filter_by_currency(transactions, "Rub")
+    # for _ in range(2):
+    #     print(next(usd_transactions))
+    #
     # descriptions = transaction_descriptions(transactions)
     # for _ in range(3):
     #     print(next(descriptions))
-#
-#     for card_number in card_number_generator(11115, 11119):
-#         print(card_number)
-#
+    #
+    # for card_number in card_number_generator(11115, 11119):
+    #     print(card_number)
+    #
     # print(format_card_number(1234567891011121))
-#     print(convert_currency("USD", 100.0))
-#     print(process_bank_search(transactions, "Перевод организации"))
-#     print(process_bank_counter(json_transactions_list, "id"))
+    # print(convert_currency("USD", 100.0))
+    # print(process_bank_search(transactions, "Перевод организации"))
+    # print(process_bank_counter(json_transactions_list, "id"))
     # print(reading_json_file("data/operations.json"))
     # print(convert_to_rub(reading_json_file("data/operations.json")[1]))
     # print(read_csv_transactions("data/transactions.csv"))

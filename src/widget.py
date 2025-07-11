@@ -7,18 +7,17 @@ def mask_account_card(type_and_number: str) -> str:
     """Маскирует номер карты или счета в зависимости от типа."""
     if not isinstance(type_and_number, str):
         return "Ошибка: Входные данные должны быть строкой."
-    type_and_number_lower = type_and_number.lower()
-    if "счет" in type_and_number_lower:
+    if "Счет" in type_and_number.title():
         account_number = type_and_number.split()[-1]  # Получаем номер счета, предполагая, что он - последнее слово
         masked_account = get_mask_account(account_number)
         if "Ошибка" in masked_account:  # Проверка, что get_mask_account() не вернула ошибку
             return masked_account
         return f"Счет {masked_account}"
-    card_types = ["visa", "maestro", "mastercard", "platinum", "gold", "classic"]
-    if any(card_type in type_and_number_lower for card_type in card_types):
+    card_types = ["Visa", "Maestro", "Mastercard", "Platinum", "Gold", "Classic", "Visa Platinum"]
+    if any(card_type in type_and_number for card_type in card_types):
         card_number = type_and_number.split()[-1]  # Получаем номер карты, предполагая, что он - последнее слово
         masked_card = get_mask_card_number(card_number)
-        return f"{type_and_number.rsplit(' ', 1)[0]} {masked_card}"  # Возвращаем название карты и маску
+        return f"{type_and_number.title().rsplit(' ', 1)[0]} {masked_card}"  # Возвращаем название карты и маску
     else:
         return "Тип карты/счета не определен."
 
