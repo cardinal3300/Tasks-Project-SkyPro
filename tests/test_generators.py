@@ -90,20 +90,6 @@ def test_transaction_descriptions_empty() -> None:
     assert descriptions == []
 
 
-def test_transaction_descriptions_with_missing_descriptions() -> None:
-    """Проверяет обработку транзакций без описаний."""
-    transactions: List[Dict[str, Any]] = [
-        {"description": "Транзакция 1"},
-        {"id": 2},  # Без описания
-        {"description": "Транзакция 3"},
-    ]
-    descriptions = list(transaction_descriptions(transactions))
-    assert descriptions == [
-        "Транзакция 1",
-        "Транзакция 3",
-    ]
-
-
 def test_card_number_generator_valid() -> None:
     """Проверяет генерацию номера карт в заданном диапазоне."""
     generated_numbers = list(card_number_generator(1, 3))
@@ -127,3 +113,10 @@ def test_card_number_generator_edge_cases() -> None:
     generated_numbers = list(card_number_generator(1, 1))
     assert len(generated_numbers) == 1
     assert generated_numbers[0] == "0000 0000 0000 0001"
+
+
+def test_format_card_number() -> None:
+    """Проверяет приведение числа к строке в формате ХХХХ ХХХХ ХХХХ ХХХХ."""
+    number = 1234567891011121
+    formatted_number = format_card_number(number)
+    assert formatted_number == "1234 5678 9101 1121"

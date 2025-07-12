@@ -1,6 +1,6 @@
 from unittest.mock import mock_open, patch
 
-from src.utils import reading_json_file
+from src.utils import process_bank_counter, process_bank_search, reading_json_file
 
 
 # Тест при верной и неверной (неполной) структуре JSON-файла
@@ -14,3 +14,13 @@ def test_reading_json_file_correct() -> None:
 def test_file_not_found() -> None:
     result = reading_json_file("nonexistent_file.json")
     assert result == []
+
+
+def test_process_bank_search() -> None:
+    # Тест с пустыми данными
+    assert process_bank_search([{}], "") == [{}]
+
+
+def test_process_bank_counter() -> None:
+    # Тест с пустыми данными
+    assert process_bank_counter([{}], []) == {}

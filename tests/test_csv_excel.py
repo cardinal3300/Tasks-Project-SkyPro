@@ -1,10 +1,11 @@
+from typing import Any
 from unittest.mock import patch
 
 from src.csv_excel import read_csv_transactions, read_excel_transactions
 
 
 @patch("pandas.read_csv")
-def test_read_csv_transactions(mock_read_csv_transactions) -> None:
+def test_read_csv_transactions(mock_read_csv_transactions: Any) -> None:
     operations = [
         {
             "id": 4699552.0,
@@ -24,7 +25,7 @@ def test_read_csv_transactions(mock_read_csv_transactions) -> None:
 
 
 @patch("pandas.read_excel")
-def test_read_excel_transactions(mock_read_excel_transactions) -> None:
+def test_read_excel_transactions(mock_read_excel_transactions: Any) -> None:
     operations = [
         {
             "id": 4699552.0,
